@@ -20,12 +20,12 @@ def pageFaultHandler(pageNumber, tlb, pageTable, physicalMemory):
             physicalMemory[int(frameNumber)].insert(i, data)
 
         backStore.close()
-        print('Found page \"' + str(pageNumber) + '\" has data: ')
-        print(physicalMemory[int(frameNumber)])
-        print('in the backing store!\n')
+        # print('Found page \"' + str(pageNumber) + '\" has data: ')
+        # print(physicalMemory[int(frameNumber)])
+        # print('in the backing store!\n')
 
     else:
-        print('Page \"' + pageNumber + '\" is out of bound!')
+        # print('Page \"' + pageNumber + '\" is out of bound!')
         return
 
     updateTLB(pageNumber, frameNumber, tlb)
@@ -41,8 +41,8 @@ def updateTLB(pageNumber, frameNumber, tlb):
         tlb.pop(0)
         tlb.append([pageNumber, frameNumber])
 
-    print('Successfully update TLB with pageNumber: ' +
-          str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
+    # print('Successfully update TLB with pageNumber: ' +
+        # str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
 
 
 def updatePageTable(pageNumber, frameNumber, pageTable):
@@ -53,8 +53,8 @@ def updatePageTable(pageNumber, frameNumber, pageTable):
         pageTable.pop(0)
         pageTable.append([pageNumber, frameNumber])
 
-    print('Successfully update pageTable table with pageNumber: ' +
-          str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
+    # print('Successfully update pageTable table with pageNumber: ' +
+    #       str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
 
 
 def updateTLBCounter(latestEntryIndex, tlb):
@@ -63,7 +63,7 @@ def updateTLBCounter(latestEntryIndex, tlb):
     tlb.pop(latestEntryIndex)
     tlb.append(latestEntry)
 
-    print('Successfully update TLB with new sequence using LRU!')
+    # print('Successfully update TLB with new sequence using LRU!')
 
 
 def updatepageTableCounter(latestEntryIndex, pageTable):
@@ -72,16 +72,16 @@ def updatepageTableCounter(latestEntryIndex, pageTable):
     pageTable.pop(latestEntryIndex)
     pageTable.append(latestEntry)
 
-    print('Successfully update page table with new sequence using LRU!')
+    # print('Successfully update page table with new sequence using LRU!')
 
 
 def readPhysicalMemory(frameNumber, offset, physicalMemory):
     if (int(frameNumber) < 256) and (int(offset) < 256):
         data = physicalMemory[int(frameNumber)][int(offset)]
-        print('Successfully read frameNumber \"' + str(frameNumber) +
-              '\" offset \"' + str(offset) + '\"\'s data ')
-        print(data)
-        print('in the physical memory!\n')
+        # print('Successfully read frameNumber \"' + str(frameNumber) +
+        #       '\" offset \"' + str(offset) + '\"\'s data ')
+        # print(data)
+        # print('in the physical memory!\n')
         return data
-    else:
-        print('Frame number or offset is out of bound')
+    # else:
+        # print('Frame number or offset is out of bound')
