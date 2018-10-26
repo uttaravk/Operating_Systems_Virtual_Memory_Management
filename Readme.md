@@ -9,4 +9,4 @@
   - Starter Code: manager.py
 
   #### Instructions to run the code:
-  python ./manager.py
+  python3 ./manager.py

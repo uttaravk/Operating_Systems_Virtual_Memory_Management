@@ -1,5 +1,3 @@
-# import struct
-
 
 def pageFaultHandler(pageNumber, tlb, pageTable, physicalMemory):
     if int(pageNumber) < 256:
@@ -14,8 +12,9 @@ def pageFaultHandler(pageNumber, tlb, pageTable, physicalMemory):
         physicalMemory[int(frameNumber)] = []
 
         for i in range(256):
-            backStore.seek(int(pageNumber)*256+i)
-            data = str(int.from_bytes(backStore.read(1), byteorder='big', signed=True))
+            backStore.seek(int(pageNumber) * 256 + i)
+            data = str(int.from_bytes(backStore.read(
+                1), byteorder='big', signed=True))
             # data = struct.unpack("B", backStore.read(1))
             # physicalMemory[int(pageNumber)].insert(i, str(data))
             physicalMemory[int(frameNumber)].insert(i, data)
@@ -42,7 +41,8 @@ def updateTLB(pageNumber, frameNumber, tlb):
         tlb.pop(0)
         tlb.append([pageNumber, frameNumber])
 
-    print('Successfully update TLB with pageNumber: ' + str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
+    print('Successfully update TLB with pageNumber: ' +
+          str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
 
 
 def updatePageTable(pageNumber, frameNumber, pageTable):
@@ -53,7 +53,8 @@ def updatePageTable(pageNumber, frameNumber, pageTable):
         pageTable.pop(0)
         pageTable.append([pageNumber, frameNumber])
 
-    print('Successfully update pageTable table with pageNumber: ' + str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
+    print('Successfully update pageTable table with pageNumber: ' +
+          str(pageNumber) + ', frameNumber: ' + str(frameNumber) + '!')
 
 
 def updateTLBCounter(latestEntryIndex, tlb):
@@ -77,11 +78,10 @@ def updatepageTableCounter(latestEntryIndex, pageTable):
 def readPhysicalMemory(frameNumber, offset, physicalMemory):
     if (int(frameNumber) < 256) and (int(offset) < 256):
         data = physicalMemory[int(frameNumber)][int(offset)]
-        print('Successfully read frameNumber \"' + str(frameNumber) + '\" offset \"' + str(offset) + '\"\'s data ')
+        print('Successfully read frameNumber \"' + str(frameNumber) +
+              '\" offset \"' + str(offset) + '\"\'s data ')
         print(data)
         print('in the physical memory!\n')
         return data
     else:
         print('Frame number or offset is out of bound')
-
-
